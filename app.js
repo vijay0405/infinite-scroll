@@ -53,6 +53,7 @@ function createPost() {
     <small class="post-date">${randomDate()}</small>
     <p class="post-excerpt">${randomFrom(texts)}</p>
     </div>
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
 	`;
     
     container.appendChild(post);
