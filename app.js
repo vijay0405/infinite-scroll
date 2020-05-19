@@ -16,34 +16,58 @@ const texts = [
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat nam commodi laudantium sapiente provident? Non officiis temporibus quo ipsa, voluptas eveniet accusamus excepturi, enim ratione, adipisci atque dolorem iure ad.',
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, molestiae fugit laudantium porro dicta mollitia cum corrupti placeat dignissimos. Autem maiores consectetur reiciendis repudiandae architecto officia ut placeat sapiente. Perferendis, doloremque veniam dignissimos nemo recusandae ipsa sint magni, aliquid repudiandae libero quidem et facilis ad odit, quia eligendi error cum!'];
 
-createPost();
-createPost();
-createPost();
-createPost();
-createPost();
-createPost();
+window.addEventListener('scroll', () => {
 
-function createPost() {
-	const post = document.createElement('div');
-	post.classList.add('post');
-	post.innerHTML = `
-		<img src="https://images.unsplash.com/photo-1588776844919-5ed4449a8fd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80" alt="" />
-			<div class="post-info">
-			<h2 class="post-title">${randomFrom(titles)}</h2>
-			<small class="post-date">${randomDate()}</small>
-			<p class="post-excerpt">${randomFrom(texts)}</p>
-		</div>
-	`;
-	
-	container.appendChild(post);
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    console.log('scroll', scrollTop + clientHeight, scrollHeight - 50);
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+        showLoading();
+    }
+});
+
+function showLoading() {
+    // show loading animation
+    loading.classList.add('show');
+
+    setTimeout(() => {
+        // remove loading animation after 1 second
+        loading.classList.remove('show');
+
+        setTimeout(() => {
+            // create new posts after a little while (wait for the loading to dissappear)
+            createPost();
+        }, 300);
+    }, 1000);
 }
 
+
+
+function createPost() {
+    const post = document.createElement('div');
+    post.classList.add('post');
+    post.innerHTML = `
+    <img src="https://images.unsplash.com/photo-1588776844919-5ed4449a8fd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80" alt="" />
+    <div class="post-info">
+    <h2 class="post-title">${randomFrom(titles)}</h2>
+    <small class="post-date">${randomDate()}</small>
+    <p class="post-excerpt">${randomFrom(texts)}</p>
+    </div>
+	`;
+    
+    container.appendChild(post);
+}
+
+createPost();
+createPost();
+createPost();
+
 function randomFrom(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function randomDate() {
-	const day = Math.floor(Math.random() * 27) + 1;
-	const month = Math.floor(Math.random() * 11) + 1;
-	return `${month}/${day}/2019`;
+    const day = Math.floor(Math.random() * 27) + 1;
+    const month = Math.floor(Math.random() * 11) + 1;
+    return `${month}/${day}/2019`;
 }
