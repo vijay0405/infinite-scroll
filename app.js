@@ -47,7 +47,7 @@ function createPost() {
     const post = document.createElement('div');
     post.classList.add('post');
     post.innerHTML = `
-    <img src="https://images.unsplash.com/photo-1588776844919-5ed4449a8fd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80" alt="" />
+    <img class="post-img" src="https://images.unsplash.com/photo-1588776844919-5ed4449a8fd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=150&q=80" alt="" />
     <div class="post-info">
     <h2 class="post-title">${randomFrom(titles)}</h2>
     <small class="post-date">${randomDate()}</small>
